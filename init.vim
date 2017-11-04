@@ -14,17 +14,14 @@ call plug#begin('~/.vim/plugged')
     endif
     " Jedi vim plugin
     Plug 'davidhalter/jedi-vim'
+    Plug 'zchee/deoplete-jedi'
     " ctrl-p is a fuzzy file finder.
     Plug 'kien/ctrlp.vim'
     " airline is a better status line and a tab-bar for nvim.
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     " gruvbox colorscheme. Seems to work the best for me.
-    Plug 'morhetz/gruvbox'
     Plug 'joshdick/onedark.vim'
-    Plug 'sheerun/vim-polyglot'
-    " neomake is a code linting tool that runs in the background.
-    Plug 'neomake/neomake'
     " Install emmet
     Plug 'mattn/emmet-vim'
     " CSS Support
@@ -37,6 +34,20 @@ call plug#begin('~/.vim/plugged')
     " auto close anything
     Plug 'townk/vim-autoclose'
     Plug 'Raimondi/delimitMate'
+    " Generic programming support
+    Plug 'jakedouglas/exuberant-ctags'
+    Plug 'honza/vim-snippets'
+    Plug 'townk/vim-autoclose'
+    Plug 'tomtom/tcomment_vim'
+    Plug 'tobyS/vmustache'
+    Plug 'janko-m/vim-test'
+    Plug 'maksimr/vim-jsbeautify'
+    Plug 'vim-syntastic/syntastic'
+    Plug 'neomake/neomake'
+    Plug 'ervandew/supertab'
+    " Git Support
+    Plug 'kablamo/vim-git-log'
+    Plug 'gregsexton/gitv'
 " }
 
 " Initialize plugin system
@@ -48,9 +59,11 @@ set number
 set relativenumber
 set textwidth=0
 set list listchars=tab:>\ ,trail:-,eol:¬
+set ruler
+set ttimeoutlen=50
 
 " General Config
-let g:mapleader = "," 
+let g:mapleader = ","
 let g:enable_bold_font = 1
 let g:enable_italic_font = 1 
 
@@ -70,17 +83,25 @@ colorscheme onedark
         let g:airline#extensions#tabline#enabled = 1
         let g:airline#extensions#tabline#buffer_idx_mode = 1
         let g:airline#extensions#tabline#fnamemod = ':t'
-        " let g:airline#extensions#tabline#left_sep = '<'
-        " let g:airline#extensions#tabline#left_alt_sep = ''
-        " let g:airline#extensions#tabline#right_sep = '>'
-        " let g:airline#extensions#tabline#right_alt_sep = ''
-        " let g:airline_left_sep = ''
-        " let g:airline_left_alt_sep = ''
-        " let g:airline_right_sep = ''
-        " let g:airline_right_alt_sep = ''
         let g:airline_theme= 'onedark'
-	let g:airline_powerline_fonts = 1
+        let g:airline_powerline_fonts = 1
     " }
+    " Syntastic Configuration {
+    	set statusline+=%#warningmsg#
+	set statusline+=%{SyntasticStatusLineFlag{}}
+	set statusline+=%*
+
+	let g:syntastic_always_populate_loc_list = 1
+	let g:syntastic_auto_loc_list = 1
+	let g:syntastic_check_on_open = 1
+    " }
+        " Vim-UtilSnips Configuration
+	" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+	let g:UltiSnipsExpandTrigger="<tab>"
+	let g:UltiSnipsJumpForwardTrigger="<c-b>"
+	let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+	let g:UltiSnipsEditSplit="vertical" " If you want :UltiSnipsEdit to split your window.
+
     " CtrlP {
         " Open file menu
         nnoremap <Leader>o :CtrlP<CR>
@@ -97,9 +118,7 @@ colorscheme onedark
     	let g:delimitMate_expand_cr = 1
     "}
     " Auto completed deoplete{
-    	let g:deoplete#enable_at_startup = 1
-	let g:deoplete#file#enable_buffer_path = 1
-	let g:deoplete#tag#cache_limit_size = 10000000
+     	let g:deoplete#enable_at_startup = 1
     " }
 
     " neomake {
@@ -111,9 +130,10 @@ colorscheme onedark
         let g:netrw_preview=1   " open previews vertically
     " }
     " Jedi vim auto complete {
-    	let g:python_host_prog = '/usr/bin/python'
+    	let g:python2_host_prog = '/usr/bin/python'
 	let g:python3_host_prog = '/usr/bin/python3'
-    " }
+   " }
+   " }
 
     " Abbreviations {
 
@@ -147,5 +167,8 @@ colorscheme onedark
 	"Move selected lines up and down
 	vnoremap J :m '>+1<CR>gv=gv'
 	vnoremap K :m '<-2<CR>gv=gv'		
+      " }
+      " Python run files {
+autocmd FileType python nnoremap <buffer> <F9> :exec '!clear; python' shellescape(@%, 1)<cr>
       " }
 " }
