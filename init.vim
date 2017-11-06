@@ -26,9 +26,14 @@ call plug#begin('~/.vim/plugged')
     Plug 'mattn/emmet-vim'
     " CSS Support
     Plug 'cakebaker/scss-syntax.vim'
-    " delete afterwords if no good
+    " python plugins 
     Plug 'hdima/python-syntax'
     Plug 'hynek/vim-python-pep8-indent'
+    Plug 'fisadev/vim-isort'
+    if has('python')
+	    " YAPF formatter for python
+	    Plug 'pignacio/vim-yapf-format'
+    endif
     " Comment stuff using gcc
     Plug 'tpope/vim-commentary'
     " auto close anything
@@ -36,8 +41,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'Raimondi/delimitMate'
     " Generic programming support
     Plug 'jakedouglas/exuberant-ctags'
+    Plug 'Shougo/neocomplcache.vim'
     Plug 'honza/vim-snippets'
-    Plug 'townk/vim-autoclose'
+    Plug 'tpope/vim-surround'
     Plug 'tomtom/tcomment_vim'
     Plug 'tobyS/vmustache'
     Plug 'janko-m/vim-test'
@@ -45,6 +51,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'vim-syntastic/syntastic'
     Plug 'neomake/neomake'
     Plug 'ervandew/supertab'
+    Plug 'mhinz/vim-signify'
     " Git Support
     Plug 'kablamo/vim-git-log'
     Plug 'gregsexton/gitv'
@@ -61,6 +68,17 @@ set textwidth=0
 set list listchars=tab:>\ ,trail:-,eol:¬
 set ruler
 set ttimeoutlen=50
+set encoding=utf-8
+let python_highlight_all=1
+filetype plugin on
+filetype indent on
+set hlsearch " highlight search results
+
+" Enable Folding
+set foldmethod=indent
+set foldlevel=99
+" Enable folding with the spacebar
+nnoremap <space> za
 
 " General Config
 let g:mapleader = ","
@@ -133,6 +151,16 @@ colorscheme onedark
     	let g:python2_host_prog = '/usr/bin/python'
 	let g:python3_host_prog = '/usr/bin/python3'
    " }
+   " Python Indentation {
+    	au BufNewFile,BufRead *.py
+				\set tabstop=4
+				\set softtabstop=4
+				\set shiftwidth=4
+				\set textwidth=4
+				\set expandtab
+				\set autoindent
+				\set fileformat=unix
+	au BufRead,BufNewFile *.py,*.pyw,*.c,*.h BadWhitespace /\s\+$/
    " }
 
     " Abbreviations {
@@ -171,4 +199,11 @@ colorscheme onedark
       " Python run files {
 autocmd FileType python nnoremap <buffer> <F9> :exec '!clear; python' shellescape(@%, 1)<cr>
       " }
-" }
+      " SimplyFold options {
+      "
+      " }
+      " You Completeme settings {
+       let g:ycm_autoclose_preview_window_after_completion=1
+       map <leader>g :YcmCompleter ToToDefinitionElseDeclaration<CR>
+       " }
+
