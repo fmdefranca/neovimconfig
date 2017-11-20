@@ -30,8 +30,8 @@ endif
 Plug 'davidhalter/jedi-vim'
 Plug 'zchee/deoplete-jedi'
 " airline is a better status line and a tab-bar for nvim.
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
 " gruvbox colorscheme. Seems to work the best for me.
 Plug 'joshdick/onedark.vim'
 " Install emmet
@@ -162,11 +162,11 @@ imap <c-s> <C-o>:w<CR>
 " Settings from old init.vim
 " Plugin Settings {
 " Airline {
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_idx_mode = 1
-let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline_theme= 'onedark'
-let g:airline_powerline_fonts = 1
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#buffer_idx_mode = 1
+" let g:airline#extensions#tabline#fnamemod = ':t'
+" let g:airline_theme= 'onedark'
+" let g:airline_powerline_fonts = 1
 " }
 " Syntastic Configuration {
 set statusline+=%#warningmsg#
