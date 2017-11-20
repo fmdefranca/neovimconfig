@@ -21,6 +21,19 @@ Plug 'KabbAmine/yowish.vim'
 call plug#end()
 
 let mapleader = ','
+set showmatch
+set number
+set relativenumber
+set textwidth=0
+set list listchars=tab:>\ ,trail:-,eol:¬
+set ruler
+set ttimeoutlen=50
+set encoding=utf-8
+let python_highlight_all=1
+filetype plugin on
+filetype indent on
+set hlsearch " highlight search results
+
 
 " Absolute width of netrw window
 let g:netrw_winsize = -28
@@ -84,3 +97,13 @@ set smartcase
 set ignorecase
 
 inoremap jj <ESC>
+
+" Abbreviations {
+cnoreabbrev Wq wq
+cnoreabbrev WQ wq
+cnoreabbrev W w
+cnoreabbrev Q q
+
+" Map save to ctrl + s
+nmap <c-s> :w<CR>
+imap <c-s> <C-o>:w<CR>
