@@ -1,8 +1,9 @@
 # Nevim Config Notes
 
 ### Install vim-plug
+Run in terminal
 ```bash
-url -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ```
 ### Can also install powerline Fonts - to use NovaMono
