@@ -36,5 +36,5 @@ sudo apt-get install -y nodejs
 ```
 ### install build-essentials
 ```bash
-sudo apt install -y build-essentials
+sudo apt install -y build-essential
 ```
