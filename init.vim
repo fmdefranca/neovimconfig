@@ -16,6 +16,7 @@ Plug 'vim-syntastic/syntastic'
 Plug 'morhetz/gruvbox'
 Plug 'MaxSt/FlatColor'
 Plug 'w0ng/vim-hybrid'
+Plug 'sickill/vim-monokai'
 Plug 'KabbAmine/yowish.vim'
 
 " Plugins
@@ -29,10 +30,6 @@ endif
 " Jedi vim plugin
 Plug 'davidhalter/jedi-vim'
 Plug 'zchee/deoplete-jedi'
-" airline is a better status line and a tab-bar for nvim.
-" Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
-" gruvbox colorscheme. Seems to work the best for me.
 Plug 'joshdick/onedark.vim'
 " Install emmet
 Plug 'mattn/emmet-vim'
@@ -66,6 +63,8 @@ Plug 'mhinz/vim-signify'
 " Git Support
 Plug 'kablamo/vim-git-log'
 Plug 'gregsexton/gitv'
+" Tmux plugin
+Plug 'tmux-plugins/vim-tmux'
 call plug#end()
 "end of vim plugins
 
@@ -117,14 +116,14 @@ nnoremap <silent> <Leader>bl :setnomodifiable<CR> " (L)ock the current buffer"
 " Vim colour scheme
 let g:solarized_contrast="high"
 set background=dark
-colorscheme yowish
+colorscheme onedark
 
 " reloads .vimrc -- making all changes active
 map <silent> <Leader>v :source ~/.config/nvim/init.vim<CR>:PlugInstall<CR>:bdelete<CR>:exe ":echo 'NVIM reloaded'"<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Lightline
-let g:lightline = { 'colorscheme': 'yowish', }
+let g:lightline = { 'colorscheme': 'one', }
 set laststatus=2
 set noshowmode
 
@@ -158,17 +157,6 @@ cnoreabbrev Q q
 nmap <c-s> :w<CR>
 imap <c-s> <C-o>:w<CR>
 
-
-" Settings from old init.vim
-" Plugin Settings {
-" Airline {
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#buffer_idx_mode = 1
-" let g:airline#extensions#tabline#fnamemod = ':t'
-" let g:airline_theme= 'onedark'
-" let g:airline_powerline_fonts = 1
-" }
-" Syntastic Configuration {
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatusLineFlag{}}
 set statusline+=%*
@@ -184,14 +172,6 @@ let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsEditSplit="vertical" " If you want :UltiSnipsEdit to split your window.
 
-" CtrlP {
-" Open file menu
-" nnoremap <Leader>o :CtrlP<CR>
-" Open buffer menu
-" nnoremap <Leader>b :CtrlPBuffer<CR>
-" Open most recently used files
-" nnoremap <Leader>f :CtrlPMRUFiles<CR>
-" }
 " neomake {
 autocmd! BufWritePost * Neomake
 nnoremap <Leader>l :lopen<CR>
@@ -230,3 +210,17 @@ let g:python3_host_prog = '/usr/bin/python3'
 let g:ycm_autoclose_preview_window_after_completion=1
 map <leader>g :YcmCompleter ToToDefinitionElseDeclaration<CR>
 " }
+
+" NETrw set up
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
+"augroup ProjectDrawer
+"	autocmd!
+"	autocmd VimEnter * :Vexplore
+"augroup END
+
+" Run python within nvim
+nnoremap <buffer> <F9> <ESC>:w<cr> :exec '!python' shellescape(@%, 1)<cr>
