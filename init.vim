@@ -180,7 +180,7 @@ nnoremap <Leader>l :lopen<CR>
 let g:delimitMate_expand_cr = 1
 "}
 " Auto completed deoplete{
-let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_at_startup = 1
 " }
 
 " neomake {
